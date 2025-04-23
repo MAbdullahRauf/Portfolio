@@ -24,20 +24,26 @@ function Contact() {
     setIsSubmitting(true);
 
     const templateParams = {
-      name: formData.name,
-      email: formData.email,
+      name: "Mail From Portfolio",
+      // email: formData.email,
+      email: 'm.abdullahrauf1@gmail.com',
       subject: formData.subject,
       message: formData.message,
+      clientEmail: formData.email,
+      clientName: formData.name,
+      clientSubject: formData.subject
+
+      // message: formData.message,
     };
 
     // Send email via EmailJS
     emailjs
-      .send('service_r2mmseo', 'template_12345', templateParams, 'user_youruserkey')
+      .send('service_r2mmseo', 'template_6u8vdg6', templateParams, 'gNV0onJE3yiJmA91w')
       .then(
         (response) => {
           setSubmitStatus('success');
           setSubmitMessage('🚀 Message sent successfully! I will get back to you soon.');
-          setIsSubmitting(false);
+          setIsSubmitting(false); 
           setFormData({
             name: '',
             email: '',
