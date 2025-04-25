@@ -21,9 +21,13 @@ function Footer() {
       <div className="container mx-auto relative z-10">
         {/* Title Section */}
         <div className={`text-center mb-12 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h2 className="text-3xl font-bold text-blue-400 mb-2">Let's Connect</h2>
-          <div className="mx-auto w-24 h-1 bg-blue-500 rounded-full"></div>
-        </div>
+  <h2 className="text-3xl font-bold text-white mb-2 transition duration-300 hover:text-blue-400">
+  Reach Out Anytime
+
+  </h2>
+  <div className="mx-auto w-24 h-1 bg-blue-500 rounded-full"></div>
+</div>
+
         
         {/* Social Icons Section */}
         <div className="flex justify-center space-x-10 mb-10">
