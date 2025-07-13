@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Convert Google Drive link to direct download format
+  const resumeLink = 'https://drive.google.com/uc?export=download&id=15tZj-yznPmAs8X993qLPJ7MvMq-uhwr9';
+
   return (
     <header className="bg-black/70 backdrop-blur-md text-white fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="container mx-auto px-6 py-4 max-w-screen-xl flex justify-between items-center">
@@ -38,19 +41,24 @@ function Header() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex space-x-10 text-lg font-medium">
-            {['About', 'Skills', 'Experience', 'Projects', 'Contact'].map((item) => (
-              <li key={item}>
-                <a 
-                  href={`#${item.toLowerCase()}`} 
-                  className="hover:text-blue-400 transition-all duration-300 hover:scale-105"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <nav className="hidden md:flex items-center space-x-10 text-lg font-medium">
+          {['About', 'Skills', 'Experience', 'Projects', 'Contact'].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="hover:text-blue-400 transition-all duration-300 hover:scale-105"
+            >
+              {item}
+            </a>
+          ))}
+          <a
+            href={resumeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 transition duration-300 text-sm font-semibold"
+          >
+            Download Resume
+          </a>
         </nav>
       </div>
 
@@ -75,6 +83,17 @@ function Header() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a 
+                  href={resumeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-blue-400 hover:underline"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Download Resume
+                </a>
+              </li>
             </ul>
           </motion.nav>
         )}

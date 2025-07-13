@@ -14,6 +14,18 @@ function Experience() {
         "Collaborating with teams to improve development and operational workflows.",
         "Monitoring and optimizing system performance for better user experiences."
       ]
+    },
+    {
+      title: "Frontend Developer",
+      company: "Stynax-Digital",
+      period: "Jun 2022 – Nov 2023",
+      description: [
+        "Developed responsive and interactive user interfaces using React.js / Next.js.",
+        "Optimized frontend performance with lazy loading, code splitting, and bundle size reduction using Webpack/Vite.",
+        "Implemented authentication and authorization flows using JWT, OAuth, and Firebase Auth.",
+        "Developed custom reusable components and maintained a component library for design consistency across products.",
+        "Worked with TypeScript to ensure type safety and reduce runtime errors in complex React applications."
+      ]
     }
   ];
 

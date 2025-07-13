@@ -106,8 +106,8 @@ function Contact() {
               </div>
 
               <a
-                href="https://drive.google.com/uc?export=download&id=11U3ERdoJACdSOaZitvX-VyYx-eYe11bG"
-                download="Resume_Muhammad_Abdullah_Rauf.pdf"
+                href="https://drive.google.com/uc?export=download&id=15tZj-yznPmAs8X993qLPJ7MvMq-uhwr9"
+                download="Abdullah's Resume.pdf"
                 className="inline-block bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-xl text-white font-bold transition transform hover:scale-105 mt-6 text-center"
               >
                 📄 Download Resume
