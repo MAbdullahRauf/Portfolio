@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import picofme from '../assets/images/picofme.png';
+import picofme from '../assets/images/picofmeupdatednew.jpeg';
 
 function About() {
   return (
