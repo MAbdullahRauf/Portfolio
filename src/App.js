@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -13,25 +13,29 @@ import Certifications from './components/Certifications';
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={
-              <>
-                <Hero />
-                <About />
-                <Skills />
-                <Certifications/>
-                <Experience />
-                <Projects />
-                <Contact />
-              
-              </>
-            } />
-          </Routes>
-        </main>
-        <Footer />
+      <div className="min-h-screen bg-canvas">
+        <Sidebar />
+        <div className="lg:pl-72">
+          <main className="pt-14 lg:pt-0">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Hero />
+                    <About />
+                    <Projects />
+                    <Experience />
+                    <Skills />
+                    <Certifications />
+                    <Contact />
+                  </>
+                }
+              />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </div>
     </Router>
   );

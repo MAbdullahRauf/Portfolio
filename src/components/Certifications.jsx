@@ -1,9 +1,10 @@
 import React from 'react';
-import { Fade, Zoom } from 'react-awesome-reveal';
+import { motion, useReducedMotion } from 'framer-motion';
 import AWS from '../assets/images/aws.png';
 import AWSCERT from '../assets/images/awscert.png';
 import KS from '../assets/images/ks.png';
 import CLOUD101 from '../assets/images/cloud-101.png';
+import { easeOut, transition, viewportOnce } from '../motion/variants';
 
 const certifications = [
   {
@@ -33,34 +34,58 @@ const certifications = [
 ];
 
 function Certifications() {
+  const reduced = useReducedMotion();
+
   return (
-    <section className="bg-gray-900 text-white py-16">
-      <div className="container mx-auto px-6">
-        <Fade direction="up">
-          <h2 className="text-3xl font-semibold text-center text-white mb-8 animate__animated animate__fadeIn">
-            My Certifications
-          </h2>
-        </Fade>
+    <section id="certifications" className="border-b border-line bg-panel px-4 py-16 md:px-10 md:py-20 lg:px-14">
+      <div className="mx-auto max-w-content">
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportOnce}
+          transition={transition(reduced, 0.5)}
+        >
+          <p className="section-label">Credentials</p>
+          <h2 className="mt-3 font-display text-3xl font-bold text-white md:text-4xl">My Certifications</h2>
+        </motion.div>
 
-        <div className="w-16 h-1 bg-blue-600 mx-auto mb-12"></div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center max-w-5xl mx-auto">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {certifications.map((certification, index) => (
-            <Zoom key={index} triggerOnce>
-              <div className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 hover:translate-y-2 transition-all duration-300 animate__animated animate__fadeInUp text-center">
-                <a href={certification.link} target="_blank" rel="noopener noreferrer">
-                  <div className="flex flex-col items-center mb-4">
-                    <img
-                      src={certification.icon}
-                      alt={certification.issuer}
-                      className="w-12 h-12 rounded-full mb-2"
-                    />
-                    <h3 className="text-xl font-semibold">{certification.title}</h3>
-                  </div>
-                  <p className="text-gray-400 text-sm">Issued by: {certification.issuer}</p>
-                </a>
+            <motion.a
+              key={certification.title}
+              href={certification.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={reduced ? false : { opacity: 0, y: 40, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={viewportOnce}
+              transition={{
+                duration: reduced ? 0 : 0.5,
+                delay: reduced ? 0 : index * 0.1,
+                ease: easeOut,
+              }}
+              whileHover={reduced ? {} : { y: -6, transition: { duration: 0.22 } }}
+              className="group flex h-full flex-col border border-line bg-canvas p-5 transition-colors hover:border-hot"
+            >
+              <div className="mb-4 flex items-center gap-3">
+                <motion.img
+                  src={certification.icon}
+                  alt={certification.issuer}
+                  className="h-11 w-11 rounded-full border border-line object-cover"
+                  whileHover={reduced ? {} : { rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.45 }}
+                />
+                <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
               </div>
-            </Zoom>
+              <h3 className="font-display text-base font-semibold leading-snug text-white group-hover:text-hot">
+                {certification.title}
+              </h3>
+              <p className="mt-3 font-mono text-[11px] leading-relaxed text-zinc-500">
+                Issued by: {certification.issuer}
+              </p>
+            </motion.a>
           ))}
         </div>
       </div>

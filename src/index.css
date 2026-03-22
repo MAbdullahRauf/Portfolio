@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Inter', sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply overflow-x-hidden bg-canvas font-sans text-zinc-200 antialiased;
+  }
+
+  ::selection {
+    @apply bg-hot/30 text-white;
+  }
+}
+
+@layer utilities {
+  .section-label {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-hot;
+  }
+
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
