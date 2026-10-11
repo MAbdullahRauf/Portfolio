@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import emailjs from 'emailjs-com';
-import { easeOut, transition, viewportOnce } from '../motion/variants';
+import React, { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import emailjs from "emailjs-com";
+import { easeOut, transition, viewportOnce } from "../motion/variants";
+import { email, linkedIn, phone, phoneHref, resumeDownload, resumeHref } from "../site";
 
 function Contact() {
   const reduced = useReducedMotion();
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
-  const [submitStatus, setSubmitStatus] = useState('');
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [submitStatus, setSubmitStatus] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -27,8 +28,8 @@ function Contact() {
     setIsSubmitting(true);
 
     const templateParams = {
-      name: 'Mail From Portfolio',
-      email: 'm.abdullahrauf1@gmail.com',
+      name: "Mail From Portfolio",
+      email: "m.abdullahrauf1@gmail.com",
       subject: formData.subject,
       message: formData.message,
       clientEmail: formData.email,
@@ -37,74 +38,63 @@ function Contact() {
     };
 
     emailjs
-      .send('service_r2mmseo', 'template_6u8vdg6', templateParams, 'gNV0onJE3yiJmA91w')
+      .send("service_r2mmseo", "template_6u8vdg6", templateParams, "gNV0onJE3yiJmA91w")
       .then(
         () => {
-          setSubmitStatus('success');
-          setSubmitMessage('🚀 Message sent successfully! I will get back to you soon.');
+          setSubmitStatus("success");
+          setSubmitMessage("Message sent. I will get back to you soon.");
           setIsSubmitting(false);
-          setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            message: '',
-          });
+          setFormData({ name: "", email: "", subject: "", message: "" });
         },
         () => {
-          setSubmitStatus('error');
-          setSubmitMessage('⚠️ Something went wrong, please try again.');
+          setSubmitStatus("error");
+          setSubmitMessage("Something went wrong. Please try again, or email me directly.");
           setIsSubmitting(false);
         }
       );
   };
 
   const inputClass =
-    'focus-ring w-full border border-line bg-panel px-4 py-3 font-mono text-sm text-white placeholder:text-zinc-600 focus:border-hot';
+    "focus-ring w-full rounded-md border border-line bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/70 focus:border-pine";
 
   return (
-    <section id="contact" className="bg-canvas px-4 py-16 md:px-10 md:py-24 lg:px-14">
+    <section id="contact" className="px-5 py-20 md:px-10 md:py-24 lg:px-14">
       <div className="mx-auto max-w-content">
         <motion.div
-          initial={reduced ? false : { opacity: 0, y: 20 }}
+          initial={reduced ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
           transition={transition(reduced, 0.45)}
         >
-          <p className="section-label">Direct line</p>
-          <h2 className="mt-3 font-display text-4xl font-bold text-white md:text-5xl">Let's Connect</h2>
+          <p className="kicker">Contact</p>
+          <h2 className="mt-3 font-display text-4xl font-medium text-ink md:text-5xl">Let’s talk</h2>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted">
+            I am open to senior platform and DevSecOps roles, and to conversations about infrastructure that needs to
+            be both faster and safer.
+          </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-5 lg:gap-12">
+        <div className="mt-12 grid gap-8 lg:grid-cols-5 lg:gap-10">
           <motion.div
-            className="border border-line bg-panel p-8 lg:col-span-3"
-            initial={reduced ? false : { opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            className="rounded-lg border border-line bg-paper p-6 sm:p-8 lg:col-span-3"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportOnce}
-            transition={{ ...transition(reduced, 0.55), ease: easeOut }}
+            transition={{ ...transition(reduced, 0.5), ease: easeOut }}
           >
-            <h3 className="font-display text-2xl font-semibold text-white">Send a Message</h3>
+            <h3 className="font-display text-2xl font-medium text-ink">Send a message</h3>
 
-            {submitMessage && submitStatus === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="mt-6 border border-emerald-500/30 bg-emerald-500/10 p-4 text-center text-sm text-emerald-200"
+            {submitMessage && (
+              <div
+                className={`mt-6 rounded-md px-4 py-3 text-sm ${
+                  submitStatus === "success" ? "bg-pine/10 text-pine" : "bg-red-50 text-red-800"
+                }`}
               >
                 {submitMessage}
-              </motion.div>
+              </div>
             )}
 
-            {submitMessage && submitStatus === 'error' && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="mt-6 border border-red-500/30 bg-red-500/10 p-4 text-center text-sm text-red-200"
-              >
-                {submitMessage}
-              </motion.div>
-            )}
-
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <input
                   type="text"
@@ -112,6 +102,7 @@ function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Name"
+                  required
                   className={inputClass}
                 />
                 <input
@@ -120,89 +111,85 @@ function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Email"
+                  required
                   className={inputClass}
                 />
               </div>
-
               <input
                 type="text"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
                 placeholder="Subject"
+                required
                 className={inputClass}
               />
-
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Your Message..."
+                placeholder="What are you working on?"
                 rows="5"
+                required
                 className={inputClass}
               />
-
-              <motion.button
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={reduced || isSubmitting ? {} : { scale: 1.01 }}
-                whileTap={reduced ? {} : { scale: 0.99 }}
-                className={`focus-ring w-full border border-hot bg-hot py-3.5 font-mono text-sm font-semibold uppercase tracking-wider text-black transition hover:bg-white ${
-                  isSubmitting ? 'cursor-not-allowed opacity-50' : ''
+                className={`focus-ring w-full rounded-md bg-ink py-3 text-sm font-medium text-canvas transition hover:bg-pine ${
+                  isSubmitting ? "cursor-not-allowed opacity-60" : ""
                 }`}
               >
-                {isSubmitting ? 'Sending...' : ' Send Message'}
-              </motion.button>
+                {isSubmitting ? "Sending…" : "Send message"}
+              </button>
             </form>
           </motion.div>
 
           <motion.div
-            className="flex flex-col justify-between border border-line bg-panel p-8 lg:col-span-2"
-            initial={reduced ? false : { opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            className="flex flex-col justify-between rounded-lg border border-line bg-paper p-6 sm:p-8 lg:col-span-2"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportOnce}
-            transition={{ ...transition(reduced, 0.55), delay: reduced ? 0 : 0.08 }}
+            transition={{ ...transition(reduced, 0.5), delay: reduced ? 0 : 0.06 }}
           >
-            <div>
-              <h3 className="font-display text-2xl font-semibold text-white">Contact Info</h3>
-              <p className="mt-6 text-zinc-400">
-                <span className="font-mono text-xs uppercase tracking-widest text-zinc-600">Phone</span>
-                <br />
-                +923484272019
-              </p>
-              <p className="mt-4 text-zinc-400">
-                <span className="font-mono text-xs uppercase tracking-widest text-zinc-600">Email</span>
-                <br />
-                m.abdullahrauf1@gmail.com
-              </p>
-              <p className="mt-4 text-zinc-400">
-                <span className="font-mono text-xs uppercase tracking-widest text-zinc-600">Location</span>
-                <br />
-                Lahore, Pakistan
-              </p>
-              <p className="mt-6 text-zinc-400">
-                <span className="font-mono text-xs uppercase tracking-widest text-zinc-600">LinkedIn</span>
-                <br />
-                <a
-                  href="https://linkedin.com/in/muhammad-abdullah-ab5062241"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-hot hover:underline"
-                >
-                  Click Me
-                </a>
-              </p>
-            </div>
+            <dl className="space-y-6">
+              <div>
+                <dt className="text-xs uppercase tracking-[0.16em] text-brass">Email</dt>
+                <dd className="mt-2">
+                  <a href={`mailto:${email}`} className="text-ink hover:text-pine">
+                    {email}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.16em] text-brass">Phone</dt>
+                <dd className="mt-2">
+                  <a href={phoneHref} className="text-ink hover:text-pine">
+                    {phone}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.16em] text-brass">Location</dt>
+                <dd className="mt-2 text-ink">Lahore, Pakistan</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.16em] text-brass">LinkedIn</dt>
+                <dd className="mt-2">
+                  <a href={linkedIn} target="_blank" rel="noopener noreferrer" className="text-pine hover:underline">
+                    muhammad-abdullah
+                  </a>
+                </dd>
+              </div>
+            </dl>
 
-            <motion.a
-              href="https://drive.google.com/uc?export=download&id=15tZj-yznPmAs8X993qLPJ7MvMq-uhwr9"
-              download="Abdullah's Resume.pdf"
-              whileHover={reduced ? {} : { scale: 1.02 }}
-              whileTap={reduced ? {} : { scale: 0.98 }}
-              className="focus-ring mt-10 inline-flex w-full items-center justify-center border border-line py-3 font-mono text-xs font-semibold uppercase tracking-wider text-white transition hover:border-hot hover:text-hot"
+            <a
+              href={resumeHref}
+              download={resumeDownload}
+              className="focus-ring mt-10 inline-flex w-full items-center justify-center rounded-md border border-line py-3 text-sm font-medium text-ink transition hover:border-pine hover:text-pine"
             >
-              📄 Download Resume
-            </motion.a>
+              Download resume
+            </a>
           </motion.div>
         </div>
       </div>

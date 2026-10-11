@@ -15,7 +15,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-canvas">
         <Sidebar />
-        <div className="lg:pl-72">
+        <div className="lg:pl-64">
           <main className="pt-14 lg:pt-0">
             <Routes>
               <Route
@@ -24,8 +24,8 @@ function App() {
                   <>
                     <Hero />
                     <About />
-                    <Projects />
                     <Experience />
+                    <Projects />
                     <Skills />
                     <Certifications />
                     <Contact />

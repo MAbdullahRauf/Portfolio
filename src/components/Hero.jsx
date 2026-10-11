@@ -1,23 +1,25 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { easeOut } from '../motion/variants';
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import portrait from "../assets/images/portrait.jpg";
+import { easeOut } from "../motion/variants";
+import { resumeDownload, resumeHref } from "../site";
 
-const staggerContainer = (reduced) => ({
+const stagger = (reduced) => ({
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: reduced ? 0 : 0.09,
-      delayChildren: reduced ? 0 : 0.08,
+      staggerChildren: reduced ? 0 : 0.08,
+      delayChildren: reduced ? 0 : 0.05,
     },
   },
 });
 
 const fadeUp = (reduced) => ({
-  hidden: { opacity: reduced ? 1 : 0, y: reduced ? 0 : 22 },
+  hidden: { opacity: reduced ? 1 : 0, y: reduced ? 0 : 16 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: reduced ? 0 : 0.55, ease: easeOut },
+    transition: { duration: reduced ? 0 : 0.5, ease: easeOut },
   },
 });
 
@@ -27,85 +29,62 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[calc(100svh-3.5rem)] flex-col justify-center border-b border-line bg-canvas px-4 py-16 md:px-10 md:py-20 md:pb-24 md:pt-12 lg:min-h-screen lg:px-14 lg:py-24 xl:py-28"
+      className="flex min-h-[calc(100svh-3.5rem)] flex-col justify-center border-b border-line px-5 py-16 md:px-10 lg:min-h-screen lg:px-14 lg:py-24"
     >
       <div className="mx-auto w-full max-w-content">
-        <div className="grid grid-cols-1 gap-10 xl:grid-cols-12 xl:gap-10 xl:items-start">
-          <motion.div
-            className="relative z-10 min-w-0 xl:col-span-8 xl:pl-4"
-            variants={staggerContainer(reduced)}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.p variants={fadeUp(reduced)} className="section-label">
-              Intro
-            </motion.p>
-            <motion.h1
-              variants={fadeUp(reduced)}
-              className="mt-6 max-w-full break-words font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] tracking-tight text-white xl:pr-6 xl:text-[clamp(1.85rem,3.2vw,3rem)]"
-            >
-              DevOps Engineer
-              <br />
-              <span className="text-zinc-500">&amp; Cloud Infrastructure</span>
-              <br />
-              Specialist
-            </motion.h1>
-            <motion.p
-              variants={fadeUp(reduced)}
-              className="mt-8 max-w-xl text-lg leading-relaxed text-zinc-400 md:text-xl"
-            >
-              Building scalable, reliable, and secure cloud infrastructure with cutting-edge DevOps practices
-            </motion.p>
-            <motion.div variants={fadeUp(reduced)} className="mt-10 flex flex-wrap gap-4">
-              <motion.a
-                href="#contact"
-                whileHover={reduced ? {} : { scale: 1.02 }}
-                whileTap={reduced ? {} : { scale: 0.98 }}
-                className="focus-ring inline-flex items-center justify-center border border-hot bg-hot px-8 py-3.5 font-mono text-sm font-semibold uppercase tracking-wider text-black transition hover:bg-white hover:text-black"
-              >
-                Contact Me
-              </motion.a>
-              <motion.a
-                href="#projects"
-                whileHover={reduced ? {} : { scale: 1.02 }}
-                whileTap={reduced ? {} : { scale: 0.98 }}
-                className="focus-ring inline-flex items-center justify-center border border-line bg-panel px-8 py-3.5 font-mono text-sm font-semibold uppercase tracking-wider text-white transition hover:border-hot hover:text-hot"
-              >
-                View My Work
-              </motion.a>
-            </motion.div>
+        <motion.div variants={stagger(reduced)} initial="hidden" animate="visible" className="max-w-3xl">
+          <motion.div variants={fadeUp(reduced)} className="mb-8 lg:hidden">
+            <img
+              src={portrait}
+              alt="Abdullah Rauf"
+              className="h-24 w-24 rounded-2xl object-cover object-top ring-1 ring-line"
+            />
           </motion.div>
 
-          <motion.div
-            className="relative z-0 min-w-0 xl:col-span-4 xl:self-start"
-            initial={reduced ? false : { opacity: 0, x: 36, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-            transition={{
-              duration: reduced ? 0 : 0.65,
-              delay: reduced ? 0 : 0.25,
-              ease: easeOut,
-            }}
+          <motion.p variants={fadeUp(reduced)} className="kicker">
+            DevSecOps · Cloud · Compliance
+          </motion.p>
+
+          <motion.h1
+            variants={fadeUp(reduced)}
+            className="mt-5 font-display text-[clamp(2.6rem,6vw,4.75rem)] font-medium leading-[1.05] tracking-tight text-ink"
           >
-            <motion.div
-              className="border border-line bg-panel p-6 font-mono text-xs leading-relaxed text-zinc-400 md:text-sm xl:max-w-none"
-              whileHover={reduced ? {} : { borderColor: 'rgba(255, 79, 0, 0.35)' }}
-              transition={{ duration: 0.25 }}
+            Building platforms that stay secure as they scale.
+          </motion.h1>
+
+          <motion.div variants={fadeUp(reduced)} className="mt-9 flex flex-wrap gap-3">
+            <a
+              href="#contact"
+              className="focus-ring inline-flex items-center justify-center rounded-md bg-ink px-5 py-3 text-sm font-medium text-canvas transition hover:bg-pine"
             >
-              <div className="mb-4 flex items-center justify-between border-b border-line pb-3 text-[10px] uppercase tracking-widest text-zinc-600">
-                <span>session.log</span>
-                <span className="text-hot">● live</span>
-              </div>
-              <p className="text-zinc-500">$ whoami</p>
-              <p className="mt-2 text-zinc-300">
-                Muhammad Abdullah — DevOps Engineer & Cloud Infrastructure Specialist
-              </p>
-              <p className="mt-6 text-zinc-500">$ cat mission.txt</p>
-              <p className="mt-2 text-zinc-400">
-                Building scalable, reliable, and secure cloud infrastructure with cutting-edge DevOps practices
-              </p>
-            </motion.div>
+              Get in touch
+            </a>
+            <a
+              href={resumeHref}
+              download={resumeDownload}
+              className="focus-ring inline-flex items-center justify-center rounded-md border border-line bg-paper px-5 py-3 text-sm font-medium text-ink transition hover:border-pine hover:text-pine"
+            >
+              Download resume
+            </a>
           </motion.div>
-        </div>
+        </motion.div>
+
+        <motion.dl
+          className="mt-16 grid max-w-3xl grid-cols-1 gap-6 border-t border-line pt-8 sm:grid-cols-2"
+          initial={reduced ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduced ? 0 : 0.5, delay: reduced ? 0 : 0.35, ease: easeOut }}
+        >
+          {[
+            ["Focus", "Secure delivery on AWS, Azure, GCP, and on-prem"],
+            ["Practice", "SOC 2, ISO 27001, and guarded pipelines"],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <dt className="text-xs uppercase tracking-[0.16em] text-brass">{label}</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-ink">{value}</dd>
+            </div>
+          ))}
+        </motion.dl>
       </div>
     </section>
   );

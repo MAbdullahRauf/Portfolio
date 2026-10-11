@@ -1,128 +1,98 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { easeOut, transition, viewportOnce } from '../motion/variants';
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { transition, viewportOnce } from "../motion/variants";
+
+const experiences = [
+  {
+    title: "DevOps Engineer",
+    company: "Axiom World",
+    context: "Intellilake",
+    period: "Feb 2026 – Present",
+    points: [
+      "Senior DevOps scope for Intellilake, a product fintech platform, covering cloud infrastructure and the delivery systems around it.",
+      "Operate in a high-security environment supporting enterprise relationships with institutions such as Millennium, KKR, and JP Morgan.",
+      "Own SDLC practice and the secure AWS footprint, with compliance treated as part of the design rather than a later review.",
+      "Lead the internal team on day-to-day support for Odoo and custom ERP systems.",
+    ],
+  },
+  {
+    title: "DevSecOps Engineer",
+    company: "Onex Studio",
+    context: "AI governance platform",
+    period: "Jan 2025 – 2026",
+    points: [
+      "Worked on an enterprise platform for AI observability and governance: model monitoring, safety, compliance, and FinOps.",
+      "Contributed to SOC 2 and ISO 27001, strengthening the security posture required by clients such as FPT.",
+      "Joined the product early and stayed through its growth into an enterprise-grade platform, across infrastructure stability and security engineering.",
+    ],
+  },
+  {
+    title: "DevOps Engineer",
+    company: "Ideatolife",
+    context: "Dubai · MENA clients",
+    period: "Feb 2024 – 2026",
+    points: [
+      "Delivered DevOps and cloud infrastructure for a Dubai-based technology firm serving clients across the MENA region, including PwC, Kulud, and DISC.",
+      "Provisioned and automated cloud environments, and kept resource use efficient enough to stay reliable.",
+      "Designed and maintained infrastructure for multiple client projects across production, staging, and UAT.",
+      "Worked with engineering teams on infrastructure problems and on how those environments were actually used.",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    company: "Syntax Digital",
+    context: "Web applications",
+    period: "Jun 2022 – 2023",
+    points: [
+      "Built web applications on Laravel and Node, with attention to performance, maintainability, and how the product felt to use.",
+      "Implemented authentication and authorization with JWT, OAuth, and Firebase.",
+      "Worked in TypeScript codebases to improve reliability and reduce runtime issues in production.",
+    ],
+  },
+];
 
 function Experience() {
   const reduced = useReducedMotion();
 
-  const experiences = [
-    {
-      title: 'DevOps Engineer',
-      company: 'Axiom World',
-      period: 'Feb 2026 – Present',
-      description: [
-        'Lead infrastructure strategy and execution for high-profile, enterprise-grade platforms serving regulated and large-scale user bases.',
-        'Architect resilient multi-region cloud estates with strong emphasis on security, compliance, observability, and cost governance.',
-        'Drive platform engineering initiatives spanning Kubernetes, service mesh, zero-trust networking, and automated recovery patterns.',
-        'Partner with executive stakeholders to align infrastructure roadmaps with business-critical delivery timelines and SLAs.',
-        'Establish SRE practices, incident response, and capacity planning to keep mission-critical workloads performant under peak demand.',
-      ],
-    },
-    {
-      title: 'DevOps Engineer',
-      company: 'OnexStudio',
-      period: 'Feb 2025 – Present',
-      description: [
-        'Design, deploy, and operate cloud-native infrastructure supporting production applications with clear ownership of reliability targets.',
-        'Implement infrastructure as code, automated provisioning, and repeatable release pipelines across staging and production environments.',
-        'Harden networking, secrets management, and access patterns to keep workloads secure without slowing delivery.',
-        'Instrument services with logging, metrics, and alerting to shorten detection and resolution of operational issues.',
-        'Collaborate with product and engineering teams to right-size resources, reduce toil, and improve deployment frequency safely.',
-      ],
-    },
-    {
-      title: 'Associate DevOps Engineer',
-      company: 'Ideatolife',
-      period: 'Feb 2024 - Present',
-      description: [
-        'Managing and optimizing CI/CD pipelines to ensure efficient software delivery.',
-        'Automating cloud infrastructure and deployment processes using modern tools.',
-        'Enhancing system reliability and scalability through containerization and orchestration.',
-        'Collaborating with teams to improve development and operational workflows.',
-        'Monitoring and optimizing system performance for better user experiences.',
-      ],
-    },
-    {
-      title: 'Frontend Developer',
-      company: 'Stynax-Digital',
-      period: 'Jun 2022 – Nov 2023',
-      description: [
-        'Developed responsive and interactive user interfaces using React.js / Next.js.',
-        'Optimized frontend performance with lazy loading, code splitting, and bundle size reduction using Webpack/Vite.',
-        'Implemented authentication and authorization flows using JWT, OAuth, and Firebase Auth.',
-        'Developed custom reusable components and maintained a component library for design consistency across products.',
-        'Worked with TypeScript to ensure type safety and reduce runtime errors in complex React applications.',
-      ],
-    },
-  ];
-
   return (
-    <section id="experience" className="border-b border-line bg-panel px-4 py-16 md:px-10 md:py-24 lg:px-14">
+    <section id="experience" className="border-b border-line bg-paper px-5 py-20 md:px-10 md:py-24 lg:px-14">
       <div className="mx-auto max-w-content">
         <motion.div
-          className="max-w-2xl"
-          initial={reduced ? false : { opacity: 0, y: 20 }}
+          initial={reduced ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
           transition={transition(reduced, 0.45)}
         >
-          <p className="section-label">Timeline</p>
-          <h2 className="mt-3 font-display text-4xl font-bold text-white md:text-5xl">Work Experience</h2>
+          <p className="kicker">Experience</p>
+          <h2 className="mt-3 font-display text-4xl font-medium text-ink md:text-5xl">Where I have worked</h2>
         </motion.div>
 
-        <div className="mt-14 space-y-0">
-          {experiences.map((exp, index) => {
-            const fromLeft = index % 2 === 0;
-            return (
-              <motion.article
-                key={`${exp.company}-${exp.period}`}
-                initial={reduced ? false : { opacity: 0, x: fromLeft ? -48 : 48 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={viewportOnce}
-                transition={{
-                  ...transition(reduced, 0.55),
-                  delay: reduced ? 0 : 0.06 * index,
-                }}
-                className="grid gap-8 border-t border-line py-12 lg:grid-cols-12 lg:gap-10"
-              >
-                <div className="lg:col-span-4">
-                  <motion.p
-                    className="font-mono text-5xl font-bold leading-none text-zinc-800 md:text-6xl"
-                    initial={reduced ? false : { opacity: 0, scale: 0.85 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={viewportOnce}
-                    transition={{ ...transition(reduced, 0.4), delay: reduced ? 0 : 0.05 + index * 0.04 }}
-                  >
-                    {String(index + 1).padStart(2, '0')}
-                  </motion.p>
-                  <h3 className="mt-4 font-display text-2xl font-bold text-white">{exp.title}</h3>
-                  <div className="mt-3 flex flex-col gap-1 font-mono text-sm">
-                    <span className="text-hot">{exp.company}</span>
-                    <span className="text-zinc-500">{exp.period}</span>
-                  </div>
-                </div>
-                <ul className="space-y-3 text-sm leading-relaxed text-zinc-400 lg:col-span-8">
-                  {exp.description.map((item, i) => (
-                    <motion.li
-                      key={i}
-                      className="flex gap-3"
-                      initial={reduced ? false : { opacity: 0, x: 12 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={viewportOnce}
-                      transition={{
-                        duration: reduced ? 0 : 0.35,
-                        delay: reduced ? 0 : 0.08 * i + index * 0.03,
-                        ease: easeOut,
-                      }}
-                    >
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-hot" aria-hidden />
-                      <span>{item}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.article>
-            );
-          })}
+        <div className="mt-12">
+          {experiences.map((role, index) => (
+            <motion.article
+              key={`${role.company}-${role.period}`}
+              initial={reduced ? false : { opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewportOnce}
+              transition={{ ...transition(reduced, 0.45), delay: reduced ? 0 : 0.04 * index }}
+              className="grid gap-6 border-t border-line py-10 lg:grid-cols-12 lg:gap-10"
+            >
+              <div className="lg:col-span-4">
+                <p className="text-xs uppercase tracking-[0.16em] text-brass">{role.period}</p>
+                <h3 className="mt-3 font-display text-2xl font-medium text-ink">{role.title}</h3>
+                <p className="mt-2 text-sm text-pine">{role.company}</p>
+                <p className="mt-1 text-sm text-muted">{role.context}</p>
+              </div>
+              <ul className="space-y-3 text-sm leading-relaxed text-muted lg:col-span-8">
+                {role.points.map((point) => (
+                  <li key={point} className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-pine" aria-hidden />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

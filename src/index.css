@@ -21,29 +21,31 @@
   }
 
   body {
-    @apply overflow-x-hidden bg-canvas font-sans text-zinc-200 antialiased;
+    @apply overflow-x-hidden bg-canvas font-sans text-ink antialiased;
+  }
+
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    section[id] {
+      scroll-margin-top: 1.5rem;
+    }
   }
 
   ::selection {
-    @apply bg-hot/30 text-white;
+    background-color: #d7e6de;
+    color: #17211c;
   }
 }
 
 @layer utilities {
-  .section-label {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-hot;
+  .kicker {
+    @apply text-[11px] font-medium uppercase tracking-[0.22em] text-brass;
   }
 
   .focus-ring {
-    @apply outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
-  }
-
-  .scrollbar-none {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-pine focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
   }
 }

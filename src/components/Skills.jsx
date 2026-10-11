@@ -1,142 +1,122 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { easeOut, transition, viewportOnce } from '../motion/variants';
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { transition, viewportOnce } from "../motion/variants";
+
+const groups = [
+  {
+    title: "Cloud",
+    skills: ["AWS", "Microsoft Azure", "Google Cloud", "Oracle Cloud", "Contabo", "Hostinger", "Railway", "On-premises"],
+  },
+  {
+    title: "CI/CD",
+    skills: ["GitHub Actions", "GitLab CI/CD", "Jenkins", "Azure Pipelines", "Bitbucket Pipelines"],
+  },
+  {
+    title: "Observability",
+    skills: [
+      "Grafana",
+      "Prometheus",
+      "Promtail",
+      "Loki",
+      "Node Exporter",
+      "Alertmanager",
+      "Datadog",
+      "Elasticsearch",
+      "Logstash",
+      "Kibana",
+      "BullMQ",
+    ],
+  },
+  {
+    title: "Containers",
+    skills: ["Docker", "Docker Swarm", "Kubernetes", "Windows, Linux, and macOS desktop builds"],
+  },
+  {
+    title: "Security and compliance",
+    skills: [
+      "SOC 2",
+      "ISO 27001",
+      "SonarQube",
+      "Sentry",
+      "Burp Suite",
+      "CodeRabbit",
+      "Sprinto",
+      "OWASP",
+      "SAST",
+      "DAST",
+      "Trivy",
+      "Docker Scout",
+      "GitLeaks",
+      "Dependabot",
+      "Penetration testing",
+    ],
+  },
+  {
+    title: "Infrastructure and secrets",
+    skills: [
+      "Terraform",
+      "Pulumi",
+      "Crossplane",
+      "AWS Control Tower",
+      "AWS Secrets Manager",
+      "Azure Key Vault",
+      "HashiCorp Vault",
+      "Bitwarden",
+    ],
+  },
+  {
+    title: "Recovery and cost",
+    skills: [
+      "Machine images",
+      "Database dumps",
+      "Versioned application images",
+      "S3 versioning",
+      "Multi-region replication",
+      "Cost anomaly detection",
+    ],
+  },
+];
 
 function Skills() {
   const reduced = useReducedMotion();
 
-  const skillCategories = [
-    {
-      title: 'Cloud Platforms ☁️',
-      skills: [
-        'AWS',
-        'Microsoft Azure',
-        'Google Cloud Platform',
-        'Oracle Cloud (OCI)',
-        'DigitalOcean',
-        'Railway',
-        'Hostinger',
-        'On-prem',
-      ],
-    },
-    {
-      title: 'CI/CD & Automation 🔁',
-      skills: [
-        'Jenkins',
-        'GitHub Actions',
-        'GitLab CI',
-        'CircleCI',
-        'Azure DevOps',
-        'Argo CD',
-        'Flux',
-        'Tekton',
-        'TeamCity',
-      ],
-    },
-    {
-      title: 'Infrastructure as Code 💻',
-      skills: [
-        'Terraform',
-        'Terragrunt',
-        'AWS CloudFormation',
-        'Ansible',
-        'Pulumi',
-        'Helm',
-        'Crossplane',
-        'Packer',
-      ],
-    },
-    {
-      title: 'Containerization & Orchestration 🐳',
-      skills: [
-        'Docker',
-        'Kubernetes',
-        'AWS ECS',
-        'EKS',
-        'GKE',
-        'AKS',
-        'Docker Swarm',
-        'Podman',
-        'Rancher',
-        'Nomad',
-      ],
-    },
-    {
-      title: 'Monitoring & Logging 📊',
-      skills: [
-        'Prometheus',
-        'Grafana',
-        'ELK Stack',
-        'Loki',
-        'Datadog',
-        'New Relic',
-        'Splunk',
-        'OpenTelemetry',
-        'Jaeger',
-        'CloudWatch',
-      ],
-    },
-    {
-      title: 'Programming Languages 👨‍💻',
-      skills: ['Python', 'Bash', 'JavaScript', 'TypeScript', 'Go', 'YAML', 'HCL'],
-    },
-  ];
-
   return (
-    <section id="skills" className="border-b border-line bg-canvas px-4 py-16 md:px-10 md:py-24 lg:px-14">
+    <section id="skills" className="border-b border-line bg-paper px-5 py-20 md:px-10 md:py-24 lg:px-14">
       <div className="mx-auto max-w-content">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+        <div className="grid gap-12 lg:grid-cols-12">
           <motion.div
-            className="lg:col-span-4 lg:sticky lg:top-8"
-            initial={reduced ? false : { opacity: 0, x: -32 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            className="lg:col-span-4 lg:sticky lg:top-10 lg:self-start"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportOnce}
-            transition={transition(reduced, 0.55)}
+            transition={transition(reduced, 0.45)}
           >
-            <p className="section-label">Capability map</p>
-            <h2 className="mt-3 font-display text-4xl font-bold text-white md:text-5xl">Technical Skills</h2>
+            <p className="kicker">Skills</p>
+            <h2 className="mt-3 font-display text-4xl font-medium text-ink md:text-5xl">What I work with</h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted">
+              Tools change with the environment. The constant is secure automation, a clear SDLC, and infrastructure
+              someone else can operate after me.
+            </p>
           </motion.div>
-          <div className="space-y-0 border-t border-line lg:col-span-8">
-            {skillCategories.map((category, index) => (
+
+          <div className="lg:col-span-8">
+            {groups.map((group, index) => (
               <motion.div
-                key={category.title}
-                initial={reduced ? false : { opacity: 0, y: 28 }}
+                key={group.title}
+                initial={reduced ? false : { opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewportOnce}
-                transition={{
-                  ...transition(reduced, 0.45),
-                  delay: reduced ? 0 : index * 0.06,
-                }}
-                className="border-b border-line py-8 last:border-b-0"
+                transition={{ ...transition(reduced, 0.4), delay: reduced ? 0 : index * 0.03 }}
+                className="border-t border-line py-6"
               >
-                <motion.h3
-                  className="font-display text-lg font-semibold text-white md:text-xl"
-                  initial={reduced ? false : { opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={viewportOnce}
-                  transition={{ delay: reduced ? 0 : 0.05 }}
-                >
-                  {category.title}
-                </motion.h3>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <motion.span
-                      key={skill}
-                      initial={reduced ? false : { opacity: 0, scale: 0.85 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={viewportOnce}
-                      transition={{
-                        duration: reduced ? 0 : 0.3,
-                        delay: reduced ? 0 : skillIndex * 0.025 + index * 0.04,
-                        ease: easeOut,
-                      }}
-                      whileHover={reduced ? {} : { scale: 1.05, borderColor: 'rgba(255, 79, 0, 0.45)' }}
-                      className="border border-line bg-panel px-3 py-1.5 font-mono text-xs text-zinc-300"
-                    >
+                <h3 className="font-display text-xl font-medium text-ink">{group.title}</h3>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <li key={skill} className="rounded-full border border-line bg-canvas px-3 py-1 text-sm text-ink">
                       {skill}
-                    </motion.span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </motion.div>
             ))}
           </div>
